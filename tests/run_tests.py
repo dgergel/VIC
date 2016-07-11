@@ -405,15 +405,17 @@ def run_system(config_file, vic_exe, test_data_dir, out_dir, driver):
                 for j, test_global_file in enumerate(list_test_global_file):
                     returncode = vic_exe.run(test_global_file,
                                              logdir=dirs['logs'])
+
                     # Check return code
                     check_returncode(vic_exe,
-                                     test_dict.pop('expected_retval', 0))
+                                        test_dict.pop('expected_retval', 0))
+
             else:
                 returncode = vic_exe.run(test_global_file, logdir=dirs['logs'],
                                          **run_kwargs)
                 # Check return code
                 check_returncode(vic_exe,
-                                 test_dict.pop('expected_retval', 0))
+                                    test_dict.pop('expected_retval', 0))
 
             test_complete = True
 
