@@ -180,7 +180,7 @@ vic_cesm_put_data()
 
                 // snow height
                 // CESM units: m
-                l2x_vic[i].l2x_Sl_snowh += AreaFactor * snow.depth / CM_PER_M;
+                l2x_vic[i].l2x_Sl_snowh += AreaFactor * snow.depth;
 
                 // 10m wind
                 // CESM units: m/s
