@@ -95,9 +95,12 @@ vic_cesm_init(vic_clock     *vclock,
 
     // populate model state, either using a cold start or from a restart file
     vic_populate_model_state(trimstr(cmeta->starttype));
+    
 
     // initialize forcings
     vic_force();
+    print_force_data(force);
+    print_x2l_data(x2l_vic);
 
     // initialize output structures
     vic_init_output(&dmy_current);
@@ -128,9 +131,15 @@ vic_cesm_run(vic_clock *vclock)
 
     // read forcing data
     vic_force();
+    print_force_data(force);
+    print_x2l_data(x2l_vic);
 
     // run vic over the domain
     vic_image_run(&dmy_current);
+
+    print_veg_con_map(veg_con_map);
+    print_parameters(param);
+    
 
     // return fields to coupler
     vic_cesm_put_data();
