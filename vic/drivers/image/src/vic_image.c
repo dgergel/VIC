@@ -135,6 +135,9 @@ main(int    argc,
     for (current = 0; current < global_param.nrecs; current++) {
         // read forcing data
         vic_force();
+        
+        // print forcing data
+        print_force_data(force);
 
         // run vic over the domain
         vic_image_run(&(dmy[current]));
