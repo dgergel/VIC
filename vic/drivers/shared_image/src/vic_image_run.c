@@ -66,6 +66,12 @@ vic_image_run(dmy_struct *dmy_current)
         vic_run(&(force[i]), &(all_vars[i]), dmy_current, &global_param,
                 &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i]);
         timer_stop(&timer);
+        // print lots of stuff before going into put data
+        print_veg_lib(veg_lib[i]);
+        print_soil_con(&(soil_con[i]);
+        print_veg_con(veg_con[i]);
+        print_force_data(&(force[i]);
+        // end of printing stuff 
 
         put_data(&(all_vars[i]), &(force[i]), &(soil_con[i]), veg_con[i],
                  veg_lib[i], &lake_con, out_data[i], &(save_data[i]),
