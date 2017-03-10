@@ -95,20 +95,25 @@ vic_cesm_init(vic_clock     *vclock,
 
     // populate model state, either using a cold start or from a restart file
     vic_populate_model_state(trimstr(cmeta->starttype));
-    
+    debug("populated model state");  
 
     // initialize forcings
     vic_force();
+    debug("initialized forcings");
     print_force_data(force);
+    debug("printed forcings");
     print_x2l_data(x2l_vic);
+    debug("printed x2l struct");
 
     // initialize output structures
     vic_init_output(&dmy_current);
+    debug("initialized output structures");
 
     // stop init timer
     timer_stop(&(global_timers[TIMER_VIC_INIT]));
     // stop vic all timer
     timer_stop(&(global_timers[TIMER_VIC_ALL]));
+    debug("stopped timer");
 
     return EXIT_SUCCESS;
 }
@@ -120,25 +125,28 @@ int
 vic_cesm_run(vic_clock *vclock)
 {
     char state_filename[MAXSTRING];
-
+    debug("in vic cesm run fctn");
     // continue vic all timer
     timer_continue(&(global_timers[TIMER_VIC_ALL]));
     // start vic run timer
     timer_start(&(global_timers[TIMER_VIC_RUN]));
-
+    debug("started timers");
     // reset l2x fields
     initialize_l2x_data();
-
+    debug("reset fields");
     // read forcing data
     vic_force();
+    debug("read forcing data");
     print_force_data(force);
+    debug("printed forcing data");
     print_x2l_data(x2l_vic);
+    debug("printed x2l data");
 
     // run vic over the domain
     vic_image_run(&dmy_current);
 
     print_veg_con_map(veg_con_map);
-    print_parameters(param);
+    print_parameters(&param);
     
 
     // return fields to coupler
