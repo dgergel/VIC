@@ -109,6 +109,12 @@ vic_cesm_init(vic_clock     *vclock,
     vic_init_output(&dmy_current);
     debug("initialized output structures");
 
+    // initialization is complete, print settings
+    log_info(
+	"Initialization is complete, print global param and options structures");
+    print_global_param(&global_param);
+    print_option(&options);
+
     // stop init timer
     timer_stop(&(global_timers[TIMER_VIC_INIT]));
     // stop vic all timer
