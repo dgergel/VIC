@@ -50,6 +50,7 @@ vic_image_run(dmy_struct *dmy_current)
     char                       dmy_str[MAXSTRING];
     size_t                     i;
     timer_struct               timer;
+    size_t                     ind_sizet;
 
     // Print the current timestep info before running vic_run
     sprint_dmy(dmy_str, dmy_current);
@@ -67,10 +68,15 @@ vic_image_run(dmy_struct *dmy_current)
                 &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i]);
         timer_stop(&timer);
         // print lots of stuff before going into put data
-        //print_veg_lib(veg_lib[i]);
-        print_soil_con(&(soil_con[i]), i, i, i, i, i);
-        print_veg_con(veg_con[i], i, "blowing", "lake", "carbon", i);
-        print_force_data(&(force[i]));
+        if ((local_domain.locations[i].latitude > 64.5) && (local_domain.locations[i].latitude < 65.0) && (local_domain.locations[i].longitude > -73.0) && (local_domain.locations[i].longitude < -72.5)) {
+        	debug("Monterey here we come");
+		debug("latitude is %f and longitude is %f", local_domain.locations[i].latitude, local_domain.locations[i].longitude);
+                ind_sizet = 1;
+		print_veg_lib(veg_lib[i], "carbon");
+		print_soil_con(&(soil_con[i]), ind_sizet, ind_sizet, ind_sizet, ind_sizet, ind_sizet);
+        	print_veg_con(veg_con[i], ind_sizet, "blowing", "lake", "carbon", ind_sizet);
+        	print_force_data(&(force[i]));
+	}
         // end of printing stuff 
 
         put_data(&(all_vars[i]), &(force[i]), &(soil_con[i]), veg_con[i],
