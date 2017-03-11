@@ -51,6 +51,9 @@ vic_image_run(dmy_struct *dmy_current)
     size_t                     i;
     timer_struct               timer;
     size_t                     ind_sizet;
+    char                       arg_blowing;
+    char                       arg_lake;
+    char                       arg_carbon;
 
     // Print the current timestep info before running vic_run
     sprint_dmy(dmy_str, dmy_current);
@@ -72,9 +75,12 @@ vic_image_run(dmy_struct *dmy_current)
         	debug("Monterey here we come");
 		debug("latitude is %f and longitude is %f", local_domain.locations[i].latitude, local_domain.locations[i].longitude);
                 ind_sizet = 1;
-		print_veg_lib(veg_lib[i], "carbon");
+		arg_blowing = "blowing";
+		arg_lake = "lake";
+		arg_carbon = "carbon";
+		print_veg_lib(veg_lib[i], arg_blowing);
 		print_soil_con(&(soil_con[i]), ind_sizet, ind_sizet, ind_sizet, ind_sizet, ind_sizet);
-        	print_veg_con(veg_con[i], ind_sizet, "blowing", "lake", "carbon", ind_sizet);
+        	print_veg_con(veg_con[i], ind_sizet, arg_blowing, arg_lake, arg_carbon, ind_sizet);
         	print_force_data(&(force[i]));
 	}
         // end of printing stuff 
