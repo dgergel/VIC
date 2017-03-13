@@ -84,6 +84,8 @@ vic_cesm_init(vic_clock     *vclock,
     // read global parameters
     vic_cesm_start(vclock, cmeta);
 
+    print_vic_clock(vclock);
+
     // Initialize time
     initialize_cesm_time();
 
@@ -100,8 +102,8 @@ vic_cesm_init(vic_clock     *vclock,
     // initialize forcings
     vic_force();
     debug("initialized forcings");
-    print_force_data(force);
-    debug("printed forcings");
+    //print_force_data(force);
+    //debug("printed forcings");
     print_x2l_data(x2l_vic);
     debug("printed x2l struct");
 
