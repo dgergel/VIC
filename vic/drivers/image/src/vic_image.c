@@ -137,10 +137,15 @@ main(int    argc,
         vic_force();
         
         // print forcing data
-        print_force_data(force);
+        // print_force_data(force);
 
         // run vic over the domain
         vic_image_run(&(dmy[current]));
+
+	// print veg con map and parameters
+	print_veg_con_map(veg_con_map);
+	print_parameters(&param);
+	
 
         // Write history files
         vic_write_output(&(dmy[current]));
