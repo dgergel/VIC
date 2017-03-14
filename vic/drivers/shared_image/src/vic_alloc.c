@@ -127,6 +127,9 @@ vic_alloc(void)
 
         veg_con_map[i].nv_active = (size_t) local_domain.locations[i].nveg + 1;
         if (options.AboveTreelineVeg >= 0) {
+	    if ((local_domain.locations[i].latitude > 64.5) && (local_domain.locations[i].latitude < 65.0) && (local_domain.locations[i].longitude > -73.0) && (local_domain.locations[i].longitude < -72.5)) {
+		debug("in AboveTreelineVeg if statement");
+	    }
             veg_con_map[i].nv_active += 1;
         }
 
