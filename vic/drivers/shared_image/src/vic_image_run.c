@@ -46,7 +46,7 @@ vic_image_run(dmy_struct *dmy_current)
     extern veg_con_struct    **veg_con;
     extern veg_hist_struct   **veg_hist;
     extern veg_lib_struct    **veg_lib;
-    extern veg_con_map_struct veg_con_map;
+    extern veg_con_map_struct *veg_con_map;
     char                       dmy_str[MAXSTRING];
     size_t                     i;
     timer_struct               timer;
