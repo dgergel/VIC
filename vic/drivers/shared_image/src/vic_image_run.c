@@ -64,6 +64,16 @@ vic_image_run(dmy_struct *dmy_current)
         update_step_vars(&(all_vars[i]), veg_con[i], veg_hist[i]);
 
         timer_start(&timer);
+
+	// print veg con and veg con map before going into vic run
+	if ((local_domain.locations[i].latitude > 64.5) && (local_domain.locations[i].latitude < 65.0) && (local_domain.locations[i].longitude > -73.0) && (local_domain.locations[i].longitude < -72.5)) {
+		debug("about to go into RUN VIC fctn");
+		debug("latitude is %f and longitude is %f", local_domain.locations[i].latitude, local_domain.locations[i].longitude);
+		print_location(&local_domain.locations[i]);
+		ind_sizet = 11;
+                print_dmy(dmy_current);
+		print_veg_con(veg_con[i], ind_sizet, options.BLOWING, options.LAKES, options.CARBON, ind_sizet);
+	}
         vic_run(&(force[i]), &(all_vars[i]), dmy_current, &global_param,
                 &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i]);
         timer_stop(&timer);
