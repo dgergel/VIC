@@ -73,7 +73,7 @@ vic_image_run(dmy_struct *dmy_current)
 		ind_sizet = 11;
                 print_dmy(dmy_current);
 		print_veg_con(veg_con[i], ind_sizet, options.BLOWING, options.LAKES, options.CARBON, ind_sizet);
-		print_veg_con_map(veg_con_map[i]);
+		print_veg_con_map(&(veg_con_map[i]));
 	}
         vic_run(&(force[i]), &(all_vars[i]), dmy_current, &global_param,
                 &lake_con, &(soil_con[i]), veg_con[i], veg_lib[i]);
@@ -90,7 +90,7 @@ vic_image_run(dmy_struct *dmy_current)
                 print_soil_con(&(soil_con[i]), ind_sizet, ind_sizet, ind_sizet, ind_sizet, ind_sizet);
                 print_veg_con(veg_con[i], ind_sizet, options.BLOWING, options.LAKES, options.CARBON, ind_sizet);
                 print_force_data(&(force[i]));
-		print_veg_con_map(veg_con_map[i]);
+		print_veg_con_map(&(veg_con_map[i]));
         }
 
         put_data(&(all_vars[i]), &(force[i]), &(soil_con[i]), veg_con[i],
