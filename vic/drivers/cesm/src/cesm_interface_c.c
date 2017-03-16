@@ -139,7 +139,7 @@ vic_cesm_run(vic_clock *vclock)
     vic_image_run(&dmy_current);
 
     // print veg con map struct
-    print_veg_con_map(veg_con_map);
+    //print_veg_con_map(veg_con_map);
 
     // return fields to coupler
     vic_cesm_put_data();
