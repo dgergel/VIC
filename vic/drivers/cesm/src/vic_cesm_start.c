@@ -77,6 +77,7 @@ vic_cesm_start(vic_clock     *vclock,
 
         // Calendar
         global_param.calendar = str_to_calendar(trimstr(vclock->calendar));
+	debug("global_param.calendar is set to %hu", global_param.calendar);
         // set NR and NF
         NF = global_param.snow_steps_per_day / global_param.model_steps_per_day;
         if (NF == 1) {

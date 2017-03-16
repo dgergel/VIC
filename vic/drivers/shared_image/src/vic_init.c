@@ -1076,6 +1076,10 @@ vic_init(void)
     // TODO: handle above treeline vegetation tile
     for (i = 0; i < local_domain.ncells_active; i++) {
         nveg = veg_con_map[i].nv_active - 1;
+	if ((local_domain.locations[i].latitude > 64.5) && (local_domain.locations[i].latitude < 65.0) && (local_domain.locations[i].longitude > -73.0) && (local_domain.locations[i].longitude < -72.5)) {
+		debug("latitude is %f and longitude is %f", local_domain.locations[i].latitude, local_domain.locations[i].longitude);
+		debug("veg_con_map[i].nv_active - 1 is %zd", veg_con_map[i].nv_active - 1);
+	}
         for (j = 0; j < veg_con_map[i].nv_active; j++) {
             veg_con[i][j].vegetat_type_num = (int) nveg;
         }
@@ -1091,6 +1095,10 @@ vic_init(void)
                                     d3start, d3count, dvar);
         for (i = 0; i < local_domain.ncells_active; i++) {
             veg_con_map[i].Cv[j] = (double) dvar[i];
+	    if ((local_domain.locations[i].latitude > 64.5) && (local_domain.locations[i].latitude < 65.0) && (local_domain.locations[i].longitude > -73.0) && (local_domain.locations[i].longitude < -72.5)) {
+		debug("latitude is %f and longitude is %f", local_domain.locations[i].latitude, local_domain.locations[i].longitude);
+		debug("veg_con_map[i].Cv[j] is %.16f", veg_con_map[i].Cv[j]);
+	    }
         }
     }
 

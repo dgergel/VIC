@@ -138,8 +138,12 @@ vic_cesm_run(vic_clock *vclock)
     // run vic over the domain
     vic_image_run(&dmy_current);
 
+    // print veg con map struct
+    print_veg_con_map(veg_con_map);
+
     // return fields to coupler
     vic_cesm_put_data();
+    print_parameters(&param);
 
     // Write history files
     vic_write_output(&dmy_current);
