@@ -80,7 +80,7 @@ vic_image_run(dmy_struct *dmy_current)
         timer_stop(&timer);
 
 	// print lots of stuff before going into put data
-        if ((local_domain.locations[i].latitude > 64.5) && (local_domain.locations[i].latitude < 65.0) && (local_domain.locations[i].longitude > -73.0) && (local_domain.locations[i].longitude < -72.5)) {
+        if ((local_domain.locations[i].latitude > 59.9) && (local_domain.locations[i].latitude < 60.0) && (local_domain.locations[i].longitude > 169.9) && (local_domain.locations[i].longitude < 170.1)) {
                 debug("Monterey");
                 debug("latitude is %f and longitude is %f", local_domain.locations[i].latitude, local_domain.locations[i].longitude);
 		print_location(&local_domain.locations[i]);
