@@ -68,6 +68,11 @@ vic_force(void)
         }
     }
 
+    // add print statement to figure out potential coupler nans problem
+    if ((local_domain.locations[i].latitude > 59.9) && (local_domain.locations[i].latitude < 60.0) && (local_domain.locations[i].longitude > 169.9) && (local_domain.locations[i].longitude < 170.1)) {
+	print_x2l_data(&x2l_vic[i]);
+    }
+
     // Air temperature
     for (j = 0; j < NF; j++) {
         for (i = 0; i < local_domain.ncells_active; i++) {
