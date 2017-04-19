@@ -85,6 +85,7 @@ vic_cesm_init(vic_clock     *vclock,
     vic_cesm_start(vclock, cmeta);
 
     debug("N_STATE_VARS is %zu", N_STATE_VARS);
+    debug("N_OUTVAR_TYPES is %zu", N_OUTVAR_TYPES);
 
     // Initialize time
     initialize_cesm_time();
