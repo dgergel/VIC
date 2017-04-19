@@ -108,8 +108,8 @@ main(int    argc,
     // read global parameters
     vic_image_start();
 
-    debug("N_STATE_VARS is %zu", N_STATE_VARS);
-    debug("N_OUTVAR_TYPES is %zu", N_OUTVAR_TYPES);
+    debug("N_STATE_VARS is %d", N_STATE_VARS);
+    debug("N_OUTVAR_TYPES is %d", N_OUTVAR_TYPES);
 
     // allocate memory
     vic_alloc();
