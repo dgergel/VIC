@@ -62,8 +62,6 @@ vic_cesm_put_data()
     double                     aero_resist;
     double                     roughness;
     double                     wind_stress;
-    double                     wind_stress_x;
-    double                     wind_stress_y;
     cell_data_struct           cell;
     energy_bal_struct          energy;
     snow_data_struct           snow;
@@ -198,16 +196,16 @@ vic_cesm_put_data()
                 // aerodynamical resistance, VIC: s/m, CESM: s/m
                 // TO-DO: update in future PR
                 if (overstory) {
-                    aero_resist = cell.aero_resist[1];
+                    aero_resist += AreaFactor * cell.aero_resist[1];
                 }
                 else {
-                    aero_resist = cell.aero_resist[0];
+                    aero_resist += AreaFactor * cell.aero_resist[0];
                 }
 
                 if (aero_resist < DBL_EPSILON) {
                     log_warn("aero_resist (%f) is < %f", aero_resist,
                              DBL_EPSILON);
-                    aero_resist = param.HUGE_RESIST;
+                    aero_resist += AreaFactor * param.HUGE_RESIST;
                 }
 
                 l2x_vic[i].l2x_Sl_ram1 += AreaFactor * aero_resist;
@@ -216,45 +214,44 @@ vic_cesm_put_data()
                 // CESM units: m
                 if (snow.snow) {
                     // snow roughness
-                    roughness = soil_con[i].snow_rough;
+                    roughness += AreaFactor * soil_con[i].snow_rough;
                 }
                 else if (HasVeg) {
                     // vegetation roughness
-                    roughness =
+                    roughness += AreaFactor *
                         veg_lib[i][veg_con[i][veg].veg_class].roughness[
                             dmy_current.month - 1];
                 }
                 else {
                     // bare soil roughness
-                    roughness = soil_con[i].rough;
+                    roughness += AreaFactor * soil_con[i].rough;
                 }
                 if (roughness < DBL_EPSILON) {
                     log_warn("roughness (%f) is < %f", roughness, DBL_EPSILON);
-                    roughness = DBL_EPSILON;
+                    roughness += DBL_EPSILON;
                 }
-                l2x_vic[i].l2x_Sl_logz0 += AreaFactor * log(roughness);
-
-                // wind stress, zonal
-                // CESM units: N m-2
-                wind_stress_x = -1 * out_data[i][OUT_DENSITY][0] *
-                                x2l_vic[i].x2l_Sa_u / aero_resist;
-                l2x_vic[i].l2x_Fall_taux += AreaFactor * wind_stress_x;
-
-                // wind stress, meridional
-                // CESM units: N m-2
-                wind_stress_y = -1 * out_data[i][OUT_DENSITY][0] *
-                                x2l_vic[i].x2l_Sa_v / aero_resist;
-                l2x_vic[i].l2x_Fall_tauy += AreaFactor * wind_stress_y;
-
-                // friction velocity
-                // CESM units: m s-1
-                wind_stress =
-                    sqrt(pow(wind_stress_x, 2) + pow(wind_stress_y, 2));
-                l2x_vic[i].l2x_Sl_fv += AreaFactor *
-                                        (wind_stress /
-                                         out_data[i][OUT_DENSITY][0]);
             }
         }
+
+	// log of the roughness
+	// CESM units: 
+	l2x_vic[i].l2x_Sl_logz0 = log(roughness);
+
+	// wind stress, zonal
+        // CESM units: N m-2
+        l2x_vic[i].l2x_Fall_taux = -1 * out_data[i][OUT_DENSITY][0] *
+                        x2l_vic[i].x2l_Sa_u / aero_resist;
+
+	// wind stress, meridional
+        // CESM units: N m-2
+        l2x_vic[i].l2x_Fall_tauy = -1 * out_data[i][OUT_DENSITY][0] *
+                        x2l_vic[i].x2l_Sa_v / aero_resist;
+
+	// friction velocity
+        // CESM units: m s-1
+        wind_stress = sqrt(pow(l2x_vic[i].l2x_Fall_taux, 2) + pow(l2x_vic[i].l2x_Fall_tauy, 2));
+        l2x_vic[i].l2x_Sl_fv = sqrt(wind_stress /
+                                out_data[i][OUT_DENSITY][0]);
 
         // set variables-set flag
         l2x_vic[i].l2x_vars_set = true;
