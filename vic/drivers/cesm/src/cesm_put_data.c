@@ -59,6 +59,7 @@ vic_cesm_put_data()
     double                     lakefactor = 1.;
     double                     rad_temp;
     double                     albedo;
+    double                     aero_cond;
     double                     aero_resist;
     double                     roughness;
     double                     wind_stress;
@@ -195,47 +196,48 @@ vic_cesm_put_data()
                 }
                 AreaFactorSum += AreaFactor;
 
-                // aerodynamical resistance, VIC: s/m, CESM: s/m
-                // TO-DO: update in future PR
+                // aerodynamical conductance, VIC: m/s
                 if (overstory) {
-                    aero_resist += AreaFactor * cell.aero_resist[1];
+                    aero_cond += AreaFactor * (1./cell.aero_resist[1]);
                 }
                 else {
-                    aero_resist += AreaFactor * cell.aero_resist[0];
+                    aero_cond += AreaFactor * (1./cell.aero_resist[0]);
                 }
 
-                if (aero_resist < DBL_EPSILON) {
-                    log_warn("aero_resist (%f) is < %f", aero_resist,
+                if ((1./aero_cond) < DBL_EPSILON) {
+                    log_warn("aero_resist (%f) is < %f", 1./aero_cond,
                              DBL_EPSILON);
-                    aero_resist += AreaFactor * param.HUGE_RESIST;
+                    //  aero_cond += param.HUGE_RESIST;
                 }
 
                 // log z0
                 // CESM units: m
                 if (snow.snow) {
                     // snow roughness
-                    roughness += AreaFactor * soil_con[i].snow_rough;
+                    roughness = soil_con[i].snow_rough;
                 }
                 else if (HasVeg) {
                     // vegetation roughness
-                    roughness += AreaFactor *
+                    roughness = 
                         veg_lib[i][veg_con[i][veg].veg_class].roughness[
                             dmy_current.month - 1];
                 }
                 else {
                     // bare soil roughness
-                    roughness += AreaFactor * soil_con[i].rough;
+                    roughness = soil_con[i].rough;
                 }
                 if (roughness < DBL_EPSILON) {
                     log_warn("roughness (%f) is < %f", roughness, DBL_EPSILON);
                     roughness += DBL_EPSILON;
                 }
+		l2x_vic[i].l2x_Sl_logz0 += AreaFactor * log(roughness);
             }
         }
 
-	// log of the roughness
-	// CESM units: 
-	l2x_vic[i].l2x_Sl_logz0 = log(roughness);
+	// aerodynamical resistance, VIC: s/m, CESM: s/m
+	// Note: this is averaged over surface and canopy 
+	// aerodynamic conductances
+	aero_resist = 1./aero_cond;
 
 	// wind stress, zonal
         // CESM units: N m-2
