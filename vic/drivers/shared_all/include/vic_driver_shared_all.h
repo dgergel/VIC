@@ -249,6 +249,7 @@ enum
     OUT_VP,               /**< near surface vapor pressure [kPa] */
     OUT_VPD,              /**< near surface vapor pressure deficit [kPa] */
     OUT_WIND,             /**< near surface wind speed [m/s] */
+    OUT_MPI_RANK,         /**< mpi rank for determining which pes a gridcell is running on */
     // Band-specific quantities
     OUT_ADV_SENS_BAND,    /**< net sensible heat flux advected to snow pack [W/m2] */
     OUT_ADVECTION_BAND,   /**< advected energy [W/m2] */

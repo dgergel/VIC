@@ -45,6 +45,7 @@ put_data(all_vars_struct   *all_vars,
     extern global_param_struct global_param;
     extern option_struct       options;
     extern parameters_struct   param;
+    extern int                 mpi_rank;
 
     size_t                     veg;
     size_t                     index;
@@ -128,6 +129,9 @@ put_data(all_vars_struct   *all_vars,
 
     // Initialize output data to zero
     zero_output_list(out_data);
+
+    // set MPI Rank 
+    out_data[OUT_MPI_RANK][0] = mpi_rank;
 
     // Set output versions of input forcings
     out_data[OUT_AIR_TEMP][0] = force->air_temp[NR];

@@ -1165,6 +1165,16 @@ set_output_met_data_info()
     strcpy(out_metadata[OUT_WIND].units, "m s-1");
     strcpy(out_metadata[OUT_WIND].description, "near surface wind speed");
 
+    /* MPI RANK [unitless] */
+    strcpy(out_metadata[OUT_MPI_RANK].varname, "OUT_MPI_RANK");
+    strcpy(out_metadata[OUT_MPI_RANK].long_name, "mpi_rank");
+    strcpy(out_metadata[OUT_MPI_RANK].standard_name,
+           "mpi_rank");
+    strcpy(out_metadata[OUT_MPI_RANK].units, "unitless");
+    strcpy(out_metadata[OUT_MPI_RANK].description,
+           "number determines which pes gridcell is being run on");
+
+
     // Carbon-cycling Terms
     /* absorbed PAR [W m-2] */
     strcpy(out_metadata[OUT_APAR].varname, "OUT_APAR");
