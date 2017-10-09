@@ -762,6 +762,22 @@ set_output_met_data_info()
     strcpy(out_metadata[OUT_SOIL_TNODE].description,
            "soil temperature for each soil thermal node");
 
+    /* depth [m] for each soil thermal node */
+    strcpy(out_metadata[OUT_SOIL_NODE_DEPTH].varname, "OUT_SOIL_NODE_DEPTH");
+    strcpy(out_metadata[OUT_SOIL_NODE_DEPTH].long_name, "soil_node_depth");
+    strcpy(out_metadata[OUT_SOIL_NODE_DEPTH].standard_name, "soil_depth");
+    strcpy(out_metadata[OUT_SOIL_NODE_DEPTH].units, "m");
+    strcpy(out_metadata[OUT_SOIL_NODE_DEPTH].description,
+           "depth for each soil thermal node");
+
+    /* thickness [m] for each soil thermal node */
+    strcpy(out_metadata[OUT_SOIL_NODE_THICKNESS].varname, "OUT_SOIL_NODE_THICKNESS");
+    strcpy(out_metadata[OUT_SOIL_NODE_THICKNESS].long_name, "soil_node_thickness");
+    strcpy(out_metadata[OUT_SOIL_NODE_THICKNESS].standard_name, "soil_thickness");
+    strcpy(out_metadata[OUT_SOIL_NODE_THICKNESS].units, "m");
+    strcpy(out_metadata[OUT_SOIL_NODE_THICKNESS].description,
+           "thickness for each soil thermal node");
+    
     /* soil temperature [C] for each soil thermal node in the wetland */
     strcpy(out_metadata[OUT_SOIL_TNODE_WL].varname, "OUT_SOIL_TNODE_WL");
     strcpy(out_metadata[OUT_SOIL_TNODE_WL].long_name, "soil_tnode_wl");
@@ -1490,6 +1506,8 @@ set_output_met_data_info()
     out_metadata[OUT_SOIL_MOIST].nelem = options.Nlayer;
     out_metadata[OUT_SOIL_TEMP].nelem = options.Nlayer;
     out_metadata[OUT_SOIL_TNODE].nelem = options.Nnode;
+    out_metadata[OUT_SOIL_NODE_DEPTH].nelem = options.Nnode;
+    out_metadata[OUT_SOIL_NODE_THICKNESS].nelem = options.Nnode;
     out_metadata[OUT_SOIL_TNODE_WL].nelem = options.Nnode;
     out_metadata[OUT_SOILT_FBFLAG].nelem = options.Nnode;
     out_metadata[OUT_ADV_SENS_BAND].nelem = options.SNOW_BAND;

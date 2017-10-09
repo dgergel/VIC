@@ -870,6 +870,10 @@ collect_eb_terms(energy_bal_struct energy,
     /** record thermal node temperatures **/
     for (index = 0; index < options.Nnode; index++) {
         out_data[OUT_SOIL_TNODE][index] += energy.T[index] * AreaFactor;
+        /** record soil node depths **/
+        out_data[OUT_SOIL_NODE_DEPTH][index] = soil_con->Zsum_node[index];
+        /** record soil thicknesses **/
+        out_data[OUT_SOIL_NODE_THICKNESS][index] = soil_con->dz_node[index];
     }
     if (IsWet) {
         for (index = 0; index < options.Nnode; index++) {
