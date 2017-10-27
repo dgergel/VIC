@@ -784,6 +784,7 @@ collect_eb_terms(energy_bal_struct energy,
                  double          **out_data)
 {
     extern option_struct options;
+    extern soil_con_struct *soil_con;
     double               AreaFactor;
     double               tmp_fract;
     double               rad_temp;
