@@ -202,8 +202,8 @@ enum
     OUT_SOIL_TEMP,        /**< soil temperature [C] */
     OUT_SOIL_TNODE,       /**< soil temperature [C] */
     OUT_SOIL_TNODE_WL,    /**< soil temperature [C] */
-    OUT_SOIL_NODE_DEPTH   /**< soil node depth [m] */
-    OUT_SOIL_NODE_THICKNESS /**< soil node thickness [m] */
+    OUT_SOIL_NODE_DEPTH,   /**< soil node depth [m] */
+    OUT_SOIL_NODE_THICKNESS, /**< soil node thickness [m] */
     OUT_SOILT_FBFLAG,     /**< soil temperature flag for each soil thermal node */
     OUT_SURF_TEMP,        /**< average surface temperature [C] */
     OUT_SURFT_FBFLAG,     /**< surface temperature flag */
