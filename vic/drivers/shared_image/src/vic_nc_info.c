@@ -68,6 +68,8 @@ set_nc_var_info(unsigned int       varid,
         nc_var->nc_counts[3] = nc_hist_file->ni_size;
         break;
     case OUT_SOIL_TNODE:
+    case OUT_SOIL_NODE_DEPTH:
+    case OUT_SOIL_NODE_THICKNESS:
     case OUT_SOIL_TNODE_WL:
     case OUT_SOILT_FBFLAG:
         nc_var->nc_dims = 4;
