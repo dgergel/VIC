@@ -105,6 +105,7 @@ SnowPackEnergyBalance(double  TSurf,
                                      intercepted snow (kg/m2s) */
     double BlowingMassFlux;       /* Mass flux of water vapor from blowing snow. (kg/m2s) */
     double SurfaceMassFlux;       /* Mass flux of water vapor from pack snow. (kg/m2s) */
+    double epsilon = 1.e-6;      /* Amount of snow depth below which we ignore the ground heat flux */
 
     /* Assign the elements of the array to the appropriate variables.  The list
        is traversed as if the elements are doubles, because:
@@ -249,7 +250,7 @@ SnowPackEnergyBalance(double  TSurf,
                         (TSurf - OldTSurf) / (Dt);
 
     /* Calculate Ground Heat Flux */
-    if (SnowDepth > DBL_EPSILON) {
+    if (SnowDepth > epsilon) {
         *GroundFlux = param.SNOW_CONDUCT * pow(SnowDensity, 2.) *
                       (TGrnd - TMean) / SnowDepth / (Dt);
     }
