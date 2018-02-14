@@ -174,9 +174,6 @@
 # Frozen Soil Parameters
 # FROZEN_MAXITER 1000
 
-# Canopy Iterations
-# MAX_ITER_GRND_CANOPY 10
-
 # Newton-Raphson solver parameters
 # NEWT_RAPH_MAXTRIAL 150
 # NEWT_RAPH_TOLX 1.0e-4

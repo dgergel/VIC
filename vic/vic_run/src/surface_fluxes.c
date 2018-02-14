@@ -73,6 +73,7 @@ surface_fluxes(bool                 overstory,
     extern option_struct     options;
     extern parameters_struct param;
 
+    int                      MAX_ITER_GRND_CANOPY;
     int                      ErrorFlag;
     int                      INCLUDE_SNOW = false;
     int                      UNSTABLE_CNT;
@@ -224,6 +225,12 @@ surface_fluxes(bool                 overstory,
     double            store_Raut;
     double            store_NPP;
 
+    if (options.CLOSE_ENERGY) {
+	MAX_ITER_GRND_CANOPY = 10;
+    }
+    else {
+        MAX_ITER_GRND_CANOPY = 0;
+    }
     if (options.CARBON) {
         store_gsLayer = calloc(options.Ncanopy, sizeof(*store_gsLayer));
         check_alloc_status(store_gsLayer, "Memory allocation error.");
@@ -715,11 +722,11 @@ surface_fluxes(bool                 overstory,
             }
             while ((fabs(tol_under - last_tol_under) > param.TOL_GRND) &&
                    (tol_under != 0) &&
-                   (under_iter < param.MAX_ITER_GRND_CANOPY));
+                   (under_iter < MAX_ITER_GRND_CANOPY));
         }
         while ((fabs(tol_over - last_tol_over) > param.TOL_OVER &&
                 overstory) && (tol_over != 0) &&
-               (over_iter < param.MAX_ITER_GRND_CANOPY));
+               (over_iter < MAX_ITER_GRND_CANOPY));
 
         /**************************************
            Compute GPP, Raut, and NPP
