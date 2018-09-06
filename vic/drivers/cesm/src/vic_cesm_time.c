@@ -100,6 +100,13 @@ advance_vic_time(void)
     num2date(global_param.time_origin_num, numdate, 0., global_param.calendar,
              global_param.time_units, &dmy_current);
 
+    if (dmy_current.dayseconds >= 86399) {
+        // account for time bug, bump to next day
+        dmy_current.dayseconds = 0;
+        dmy_current.day_in_year += 1;
+        dmy_current.day += 1; 
+    }
+
     if (invalid_date(global_param.calendar, &dmy_current)) {
         sprint_dmy(dmy_string, &dmy_current);
         log_err("Invalid date encountered while advancing VIC clock in "
